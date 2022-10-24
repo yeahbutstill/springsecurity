@@ -1,0 +1,3 @@
+com/yeahbutstill/springsecurity/demo/config/DemoAppConfig.class
+com/yeahbutstill/springsecurity/demo/config/MySpringMvcDispatcherServletInitializer.class
+com/yeahbutstill/springsecurity/demo/controller/DemoController.class
