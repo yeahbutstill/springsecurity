@@ -18,7 +18,7 @@ public class DemoSecurityConfig {
         UserDetails user = User.withDefaultPasswordEncoder()
                 .username("user")
                 .password("password")
-                .roles("PELAKSANA")
+                .roles("PELAKSANA", "BPR", "FU", "BASICROLES")
                 .build();
         return new InMemoryUserDetailsManager(user);
     }
@@ -26,12 +26,18 @@ public class DemoSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
-                        .anyRequest().authenticated()
+                        .antMatchers("/").hasRole("BASICROLES")
+                        .antMatchers("/gssk/**").hasRole("BPR")
+                        .antMatchers("/gamr/**").hasRole("PELAKSANA")
                         .and()
                         .formLogin()
                             .loginPage("/showMyLoginPage")
                             .loginProcessingUrl("/authenticateTheUser")
-                            .permitAll();
+                            .permitAll()
+                        .and()
+                        .logout().permitAll()
+                        .and()
+                        .exceptionHandling().accessDeniedPage("/access-denied");
         return http.build();
     }
 

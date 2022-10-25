@@ -11,4 +11,16 @@ public class DemoController {
         return "home";
     }
 
+    // add request mapping for /gssk
+    @GetMapping("/gssk")
+    public String showGssk() {
+        return "gssk";
+    }
+
+    // add request mapping for /gamr
+    @GetMapping("/gamr")
+    public String showGamr() {
+        return "gamr";
+    }
+
 }
